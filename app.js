@@ -66,9 +66,9 @@ var usb = new imgSelection ('USB', 'img/usb.gif', imgArray[17]);
 var waterCan = new imgSelection ('Water-can', 'img/usb.gif', imgArray[18]);
 var wineGlass = new imgSelection ('Wine Glass', 'img/wine-glass.jpg', imgArray[19]);
 
-function imgSelection(name, src, tag) {
+function imgSelection(name, source, tag) {
   this.name = name;
-  this.src = src;
+  this.source = source;
   this.tag = tag;
   this.clicked = 0;
   this.displayed = 0;
@@ -80,7 +80,35 @@ function randomNumber() {
   return Math.floor(Math.random() * (prodArray.length - 0));
 }
 
+function randomPicture() {
+  var ranNum1 = randomNumber();
+  console.log(ranNum1);
+  var ranNum2 = randomNumber();
+  console.log(ranNum2);
+  var ranNum3 = randomNumber();
+  console.log(ranNum3);
+  while(ranNum1 === ranNum2 && ranNum1 === ranNum3 && ranNum2 === ranNum3) {
+    randomPicture();
+  }
+  randomimg1 = prodArray[ranNum1];
+  randomimg2 = prodArray[ranNum2];
+  randomimg3 = prodArray[ranNum3];
+  console.log(randomimg1, randomimg2, randomimg3);
+}
 
+function putPictureOnPage() {
+  randomPicture();
   var product1 = document.getElementById('product1');
-  var product2 = document.getElementById('product2');
-  var product3 = document.getElementById('product3');
+  var image = document.createElement('img');
+  image.src = randomimg1.source;
+  product1.appendChild(image);
+  product1 = document.getElementById('product2');
+  image = document.createElement('img');
+  image.src = randomimg2.source;
+  product1.appendChild(image);
+  product1 = document.getElementById('product3');
+  image = document.createElement('img');
+  image.src = randomimg3.source;
+  product1.appendChild(image);
+}
+putPictureOnPage();
