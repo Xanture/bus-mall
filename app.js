@@ -81,15 +81,14 @@ function randomNumber() {
 }
 
 function randomPicture() {
-  var ranNum1 = randomNumber();
-  console.log(ranNum1);
-  var ranNum2 = randomNumber();
-  console.log(ranNum2);
-  var ranNum3 = randomNumber();
-  console.log(ranNum3);
-  while(ranNum1 === ranNum2 && ranNum1 === ranNum3 && ranNum2 === ranNum3) {
-    randomPicture();
-  }
+  do {
+    var ranNum1 = randomNumber();
+    console.log(ranNum1);
+    var ranNum2 = randomNumber();
+    console.log(ranNum2);
+    var ranNum3 = randomNumber();
+    console.log(ranNum3);
+  } while(ranNum1 === ranNum2 || ranNum1 === ranNum3 || ranNum2 === ranNum3);
   randomimg1 = prodArray[ranNum1];
   randomimg2 = prodArray[ranNum2];
   randomimg3 = prodArray[ranNum3];
