@@ -73,9 +73,10 @@ var usb = new imgSelection ('USB', 'img/usb.gif', imgArray[17]);
 var waterCan = new imgSelection ('Water-can', 'img/water-can.jpg', imgArray[18]);
 var wineGlass = new imgSelection ('Wine Glass', 'img/wine-glass.jpg', imgArray[19]);
 
-function imgSelection(name, source) {
+function imgSelection(name, source, tag) {
   this.name = name;
   this.source = source;
+  this.tag = tag;
   this.clicked = 0;
   this.displayed = 0;
   this.percentclicked = 0;
@@ -115,9 +116,7 @@ function putPictureOnPage() {
   image.src = picturesThatGoOnThePage[2].source;
   product3.appendChild(image);
 
-  console.log(picturesThatGoOnThePage);
   picturesPrevious = picturesThatGoOnThePage;
-  console.log(picturesPrevious);
 }
 
 product1.addEventListener('click', handleImgClick);
@@ -127,12 +126,12 @@ product3.addEventListener('click', handleImgClick);
 putPictureOnPage();
 
 function handleImgClick(e) {
-  console.log('Click');
-var imageId = e.target;
-  if (imageId == imgArray[1]) {
+  var imageId = e.target;
+  console.log(typeof tauntaun.tag);
+  if (imageId == imgArray[15]) {
     console.log('woot');
   } else {
     putPictureOnPage()
   }
-console.log(imageId);
+console.log(typeof imageId);
 }
