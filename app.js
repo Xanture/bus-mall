@@ -9,7 +9,7 @@ var ranNum1, ranNum2, ranNum3;
 var bag = new imgSelection ('Bag', 'img/bag.jpg');
 var banana = new imgSelection ('Banana', 'img/banana.jpg');
 var bathroom = new imgSelection ('Bathroom', 'img/bathroom.jpg');
-var boots = new imgSelection ('Boots', 'img/boots.jpg', imgArray[3]);
+var boots = new imgSelection ('Boots', 'img/boots.jpg');
 var breakfast = new imgSelection ('Breakfast', 'img/breakfast.jpg');
 
 var bubblegum = new imgSelection ('Bubblegum', 'img/bubblegum.jpg');
@@ -30,10 +30,9 @@ var usb = new imgSelection ('USB', 'img/usb.gif');
 var waterCan = new imgSelection ('Water-can', 'img/water-can.jpg');
 var wineGlass = new imgSelection ('Wine Glass', 'img/wine-glass.jpg');
 
-function imgSelection(name, source, tag) {
+function imgSelection(name, source) {
   this.name = name;
   this.source = source;
-  this.tag = tag;
   this.clicked = 0;
   this.displayed = 0;
   this.percentclicked = 0;
