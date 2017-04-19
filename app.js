@@ -6,6 +6,9 @@ var picturesThatGoOnThePage = [];
 var picturesToGoOnThePage = [];
 var ranNum1, ranNum2, ranNum3;
 var picturesPrevious = [];
+var product1 = document.getElementById('product1')
+var product2 = document.getElementById('product2')
+var product3 = document.getElementById('product3')
 
 var bag = new imgSelection ('Bag', 'img/bag.jpg');
 var banana = new imgSelection ('Banana', 'img/banana.jpg');
@@ -45,6 +48,9 @@ function randomNumber() {
 }
 
 function putPictureOnPage() {
+
+  picturesThatGoOnThePage = []
+
   var nextPhoto = prodArray.splice(randomNumber(prodArray), 1);
   picturesThatGoOnThePage = picturesThatGoOnThePage.concat(nextPhoto);
   nextPhoto = prodArray.splice(randomNumber(prodArray), 1);
@@ -53,6 +59,7 @@ function putPictureOnPage() {
   picturesThatGoOnThePage = picturesThatGoOnThePage.concat(nextPhoto);
   console.log('picturesthatgo', picturesThatGoOnThePage);
   prodArray = prodArray.concat(picturesPrevious);
+
 
   var product1 = document.getElementById('product1');
   var image = document.createElement('img');
@@ -68,16 +75,15 @@ function putPictureOnPage() {
   product3.appendChild(image);
 
   picturesPrevious = picturesThatGoOnThePage;
-  picturesThatGoOnThePage = []
-
-  // nextPhoto = prodArray.splice(randomNumber(prodArray), 1);
-  // picturesToGoOnThePage = picturesToGoOnThePage.concat(nextPhoto);
-  // nextPhoto = prodArray.splice(randomNumber(prodArray), 1);
-  // picturesToGoOnThePage = picturesToGoOnThePage.concat(nextPhoto);
-  // nextPhoto = prodArray.splice(randomNumber(prodArray), 1);
-  // picturesToGoOnThePage = picturesToGoOnThePage.concat(nextPhoto);
+    picturesThatGoOnThePage = []
+  return picturesThatGoOnThePage;
 
 }
+
+product1.addEventListener('click', handleImgClick);
+product2.addEventListener('click', handleImgClick);
+product3.addEventListener('click', handleImgClick);
+
 putPictureOnPage();
 
 function handleImgClick(e) {
