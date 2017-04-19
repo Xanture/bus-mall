@@ -1,7 +1,9 @@
 'use strict';
 
-var randomimg1, randomimg2, randomimg3
-var prodArray = []
+var randomimg1, randomimg2, randomimg3;
+var prodArray = [];
+var picturesThatWentOnThePage = [];
+var ranNum1, ranNum2, ranNum3;
 
 var imgArray = new Array();
 imgArray[0] = new Image();
@@ -63,7 +65,7 @@ var sweep = new imgSelection ('Sweep', 'img/sweep.png', imgArray[14]);
 var tauntaun = new imgSelection ('Tauntaun', 'img/tauntaun.jpg', imgArray[15]);
 var unicorn = new imgSelection ('Unicorn', 'img/unicorn.jpg', imgArray[16]);
 var usb = new imgSelection ('USB', 'img/usb.gif', imgArray[17]);
-var waterCan = new imgSelection ('Water-can', 'img/usb.gif', imgArray[18]);
+var waterCan = new imgSelection ('Water-can', 'img/water-can.jpg', imgArray[18]);
 var wineGlass = new imgSelection ('Wine Glass', 'img/wine-glass.jpg', imgArray[19]);
 
 function imgSelection(name, source, tag) {
@@ -77,37 +79,76 @@ function imgSelection(name, source, tag) {
 }
 
 function randomNumber() {
-  return Math.floor(Math.random() * (prodArray.length - 0));
+  return Math.floor(Math.random() * prodArray.length - 0);
 }
 
+
+
+
 function randomPicture() {
-  do {
-    var ranNum1 = randomNumber();
-    console.log(ranNum1);
-    var ranNum2 = randomNumber();
-    console.log(ranNum2);
-    var ranNum3 = randomNumber();
-    console.log(ranNum3);
-  } while(ranNum1 === ranNum2 || ranNum1 === ranNum3 || ranNum2 === ranNum3);
-  randomimg1 = prodArray[ranNum1];
-  randomimg2 = prodArray[ranNum2];
-  randomimg3 = prodArray[ranNum3];
-  console.log(randomimg1, randomimg2, randomimg3);
+  var nextPhoto = prodArray.splice(randomNumber(prodArray), 1);
+  picturesThatWentOnThePage = picturesThatWentOnThePage.concat(nextPhoto);
+  nextPhoto = prodArray.splice(randomNumber(prodArray), 1);
+  picturesThatWentOnThePage = picturesThatWentOnThePage.concat(nextPhoto);
+  nextPhoto = prodArray.splice(randomNumber(prodArray), 1);
+  picturesThatWentOnThePage = picturesThatWentOnThePage.concat(nextPhoto);
+  console.log(picturesThatWentOnThePage);
+  console.log(nextPhoto);
+  console.log(prodArray);
 }
+//   do {
+//     ranNum1 = randomNumber();
+//     console.log(ranNum1);
+//     ranNum2 = randomNumber();
+//     console.log(ranNum2);
+//     ranNum3 = randomNumber();
+//     console.log(ranNum3);
+//   } while(ranNum1 === ranNum2 || ranNum1 === ranNum3 || ranNum2 === ranNum3);
+//   randomimg1 = prodArray[ranNum1];
+//   randomimg2 = prodArray[ranNum2];
+//   randomimg3 = prodArray[ranNum3];
+//   picturesThatWentOnThePage.push(ranNum1);
+//   picturesThatWentOnThePage.push(ranNum2);
+//   picturesThatWentOnThePage.push(ranNum3);
+//   console.log(ranNum1, ranNum2, ranNum3);
+// }
+// function newPictures() {
+//   var newRanNum1 = randomNumber();
+//   console.log(ranNum1);
+//   var newRanNum2 = randomNumber();
+//   console.log(ranNum2);
+//   var newRanNum3 = randomNumber();
+//   console.log(ranNum3);
+//   while(newRanNum1 === ranNum1 || newRanNum1 === ranNum2 || newRanNum1 === ranNum3 || newRanNum2 === ranNum1 || newRanNum2 === ranNum2 || newRanNum2 === ranNum3 || newRanNum3 === ranNum1 || newRanNum3 === ranNum2 || newRanNum3 === ranNum3) {
+//     newRanNum1 = randomNumber();
+//     console.log(newRanNum1);
+//     newRanNum2 = randomNumber();
+//     console.log(newRanNum2);
+//     newRanNum3 = randomNumber();
+//     console.log(newRanNum3);
+//     console.log(ranNum1, ranNum2, ranNum3);
+//     console.log(newRanNum1, newRanNum2, newRanNum3);
+//   }
+// }
 
 function putPictureOnPage() {
   randomPicture();
+  // newPictures();
   var product1 = document.getElementById('product1');
   var image = document.createElement('img');
-  image.src = randomimg1.source;
+  image.src = picturesThatWentOnThePage[0].source;
   product1.appendChild(image);
-  product1 = document.getElementById('product2');
+  var product2 = document.getElementById('product2');
   image = document.createElement('img');
-  image.src = randomimg2.source;
-  product1.appendChild(image);
-  product1 = document.getElementById('product3');
+  image.src = picturesThatWentOnThePage[1].source;
+  product2.appendChild(image);
+  var product3 = document.getElementById('product3');
   image = document.createElement('img');
-  image.src = randomimg3.source;
-  product1.appendChild(image);
+  image.src = picturesThatWentOnThePage[2].source;
+  product3.appendChild(image);
 }
 putPictureOnPage();
+
+function handleImgClick(e) {
+var imageId = e.target.id;
+}
