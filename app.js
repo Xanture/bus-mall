@@ -2,8 +2,13 @@
 
 var randomimg1, randomimg2, randomimg3;
 var prodArray = [];
-var picturesThatWentOnThePage = [];
+var picturesThatGoOnThePage = [];
+var picturesToGoOnThePage = [];
 var ranNum1, ranNum2, ranNum3;
+var picturesPrevious = [];
+var product1 = document.getElementById('product1')
+var product2 = document.getElementById('product2')
+var product3 = document.getElementById('product3')
 
 var imgArray = new Array();
 imgArray[0] = new Image();
@@ -82,73 +87,51 @@ function randomNumber() {
   return Math.floor(Math.random() * prodArray.length - 0);
 }
 
-
-
-
-function randomPicture() {
-  var nextPhoto = prodArray.splice(randomNumber(prodArray), 1);
-  picturesThatWentOnThePage = picturesThatWentOnThePage.concat(nextPhoto);
-  nextPhoto = prodArray.splice(randomNumber(prodArray), 1);
-  picturesThatWentOnThePage = picturesThatWentOnThePage.concat(nextPhoto);
-  nextPhoto = prodArray.splice(randomNumber(prodArray), 1);
-  picturesThatWentOnThePage = picturesThatWentOnThePage.concat(nextPhoto);
-  console.log(picturesThatWentOnThePage);
-  console.log(nextPhoto);
-  console.log(prodArray);
-}
-//   do {
-//     ranNum1 = randomNumber();
-//     console.log(ranNum1);
-//     ranNum2 = randomNumber();
-//     console.log(ranNum2);
-//     ranNum3 = randomNumber();
-//     console.log(ranNum3);
-//   } while(ranNum1 === ranNum2 || ranNum1 === ranNum3 || ranNum2 === ranNum3);
-//   randomimg1 = prodArray[ranNum1];
-//   randomimg2 = prodArray[ranNum2];
-//   randomimg3 = prodArray[ranNum3];
-//   picturesThatWentOnThePage.push(ranNum1);
-//   picturesThatWentOnThePage.push(ranNum2);
-//   picturesThatWentOnThePage.push(ranNum3);
-//   console.log(ranNum1, ranNum2, ranNum3);
-// }
-// function newPictures() {
-//   var newRanNum1 = randomNumber();
-//   console.log(ranNum1);
-//   var newRanNum2 = randomNumber();
-//   console.log(ranNum2);
-//   var newRanNum3 = randomNumber();
-//   console.log(ranNum3);
-//   while(newRanNum1 === ranNum1 || newRanNum1 === ranNum2 || newRanNum1 === ranNum3 || newRanNum2 === ranNum1 || newRanNum2 === ranNum2 || newRanNum2 === ranNum3 || newRanNum3 === ranNum1 || newRanNum3 === ranNum2 || newRanNum3 === ranNum3) {
-//     newRanNum1 = randomNumber();
-//     console.log(newRanNum1);
-//     newRanNum2 = randomNumber();
-//     console.log(newRanNum2);
-//     newRanNum3 = randomNumber();
-//     console.log(newRanNum3);
-//     console.log(ranNum1, ranNum2, ranNum3);
-//     console.log(newRanNum1, newRanNum2, newRanNum3);
-//   }
-// }
-
 function putPictureOnPage() {
-  randomPicture();
-  // newPictures();
+
+  picturesThatGoOnThePage = []
+
+  var nextPhoto = prodArray.splice(randomNumber(prodArray), 1);
+  nextPhoto[0].displayed++
+  picturesThatGoOnThePage = picturesThatGoOnThePage.concat(nextPhoto);
+  nextPhoto = prodArray.splice(randomNumber(prodArray), 1);
+    nextPhoto[0].displayed++
+  picturesThatGoOnThePage = picturesThatGoOnThePage.concat(nextPhoto);
+  nextPhoto = prodArray.splice(randomNumber(prodArray), 1);
+    nextPhoto[0].displayed++
+  picturesThatGoOnThePage = picturesThatGoOnThePage.concat(nextPhoto);
+  prodArray = prodArray.concat(picturesPrevious)
+
+
   var product1 = document.getElementById('product1');
   var image = document.createElement('img');
-  image.src = picturesThatWentOnThePage[0].source;
+  image.src = picturesThatGoOnThePage[0].source;
   product1.appendChild(image);
   var product2 = document.getElementById('product2');
   image = document.createElement('img');
-  image.src = picturesThatWentOnThePage[1].source;
+  image.src = picturesThatGoOnThePage[1].source;
   product2.appendChild(image);
   var product3 = document.getElementById('product3');
   image = document.createElement('img');
-  image.src = picturesThatWentOnThePage[2].source;
+  image.src = picturesThatGoOnThePage[2].source;
   product3.appendChild(image);
+
+  picturesPrevious = picturesThatGoOnThePage;
 }
+
+product1.addEventListener('click', handleImgClick);
+product2.addEventListener('click', handleImgClick);
+product3.addEventListener('click', handleImgClick);
+
 putPictureOnPage();
 
 function handleImgClick(e) {
-var imageId = e.target.id;
+  var imageId = e.target;
+  console.log(typeof tauntaun.tag);
+  if (imageId == imgArray[15]) {
+    console.log('woot');
+  } else {
+    putPictureOnPage()
+  }
+console.log(typeof imageId);
 }
