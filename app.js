@@ -95,6 +95,8 @@ function handleImgClick(e) {
     product2.removeEventListener('click', handleImgClick);
     product3.removeEventListener('click', handleImgClick);
     prodArray = prodArray.concat(picturesPrevious);
+
+    localStorage.clear();
     localStorage.data = JSON.stringify(prodArray);
 
     renderChart();
@@ -103,7 +105,6 @@ function handleImgClick(e) {
 
 try {
   prodArray = JSON.parse(localStorage.data);
-  localStorage.clear();
 } catch (error) {
   console.log('no data');
 }
