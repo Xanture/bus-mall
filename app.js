@@ -1,4 +1,3 @@
-
 'use strict';
 
 var prodArray = [];
@@ -6,7 +5,6 @@ var picturesThatGoOnThePage = [];
 var picturesPrevious = [];
 var product1, product2, product3;
 var clicksRemaining = 25;
-
 
 function imgSelection(name, src, tag) {
   this.name = name;
@@ -57,7 +55,6 @@ function putPictureOnPage() {
   picturesThatGoOnThePage = picturesThatGoOnThePage.concat(nextPhoto);
   prodArray = prodArray.concat(picturesPrevious);
 
-
   product1 = document.getElementById('product1');
   var image1 = document.createElement('img');
   image1.setAttribute('pictures-that-go-on-the-page', 0);
@@ -76,15 +73,12 @@ function putPictureOnPage() {
   image3.src = picturesThatGoOnThePage[2].src;
   product3.appendChild(image3);
 
-
   picturesPrevious = picturesThatGoOnThePage;
 
   product1.addEventListener('click', handleImgClick);
   product2.addEventListener('click', handleImgClick);
   product3.addEventListener('click', handleImgClick);
 }
-
-
 
 function handleImgClick(e) {
   clicksRemaining--;
@@ -101,6 +95,8 @@ function handleImgClick(e) {
     product2.removeEventListener('click', handleImgClick);
     product3.removeEventListener('click', handleImgClick);
     prodArray = prodArray.concat(picturesPrevious);
+
+    localStorage.clear();
     localStorage.data = JSON.stringify(prodArray);
 
     renderChart();
@@ -109,7 +105,6 @@ function handleImgClick(e) {
 
 try {
   prodArray = JSON.parse(localStorage.data);
-  localStorage.clear();
 } catch (error) {
   console.log('no data');
 }

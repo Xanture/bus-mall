@@ -12,10 +12,15 @@
   align-items: center;
 }
 .banner {
-  height: 150px;
+  height: 200px;
   border: 2px solid red;
 }
 .product-counter {
   height: 150px;
   border: 2px solid red;
+}
+.banner {
+  background-image: url(img/busmaul.png);
+  background-repeat: no-repeat;
+  background-position: center;
 }
