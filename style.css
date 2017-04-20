@@ -23,4 +23,6 @@
   background-image: url(img/busmaul.png);
   background-repeat: no-repeat;
   background-position: center;
+  height: 200px;
+  position: fixed;
 }
