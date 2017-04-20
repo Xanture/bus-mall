@@ -5,10 +5,11 @@ var prodArray = [];
 var picturesThatGoOnThePage = [];
 var picturesPrevious = [];
 var product1, product2, product3;
+var clicksRemaining = 25;
 
-function imgSelection(name, source, tag) {
+function imgSelection(name, src, tag) {
   this.name = name;
-  this.source = source;
+  this.src = src;
   this.tag = tag;
   this.clicked = 0;
   this.displayed = 0;
@@ -58,55 +59,81 @@ function putPictureOnPage() {
 
   product1 = document.getElementById('product1');
   var image1 = document.createElement('img');
-  image1.src = picturesThatGoOnThePage[0].source;
+  image1.setAttribute('pictures-that-go-on-the-page', 0);
+  image1.src = picturesThatGoOnThePage[0].src;
   product1.appendChild(image1);
 
   product2 = document.getElementById('product2');
   var image2 = document.createElement('img');
-  image2.src = picturesThatGoOnThePage[1].source;
+  image2.setAttribute('pictures-that-go-on-the-page', 1);
+  image2.src = picturesThatGoOnThePage[1].src;
   product2.appendChild(image2);
 
   product3 = document.getElementById('product3');
   var image3 = document.createElement('img');
-  image3.src = picturesThatGoOnThePage[2].source;
+  image3.setAttribute('pictures-that-go-on-the-page', 2);
+  image3.src = picturesThatGoOnThePage[2].src;
   product3.appendChild(image3);
 
+
   picturesPrevious = picturesThatGoOnThePage;
+
   product1.addEventListener('click', handleImgClick);
   product2.addEventListener('click', handleImgClick);
   product3.addEventListener('click', handleImgClick);
 }
 
 
-putPictureOnPage();
 
 function handleImgClick(e) {
-  var imageId = e.target;
-  console.log(imageId);
+  clicksRemaining--;
   product1.innerHTML = [];
   product3.innerHTML = [];
   product2.innerHTML = [];
-  putPictureOnPage();
+  var imageId = e.target;
+  var photosOnScreenIndex = imageId.getAttribute('pictures-that-go-on-the-page');
+  picturesThatGoOnThePage[photosOnScreenIndex].clicked++;
+  if (clicksRemaining > 0){
+    putPictureOnPage();
+  } else {
+    product1.removeEventListener('click', handleImgClick);
+    product2.removeEventListener('click', handleImgClick);
+    product3.removeEventListener('click', handleImgClick);
+    renderChart();
+  }
 }
-// function renderChart() {
-//   app.textConent = '';
-//   var canvas = document.createElement('canvas');
-//   canvas.width = app.clientWidth;
-//   canvas.height = app.clientWidth;
-//   app.appendChild(canvas);
-//
-//   var ctx = canvas.getContext('2d');
-//   ctx.fillRect(0,0,50,50);
-//   var data = {
-//     lables: [],
-//     datasets: [
-//       {
-//         label: 'Click count',
-//         dats: []
-//       },
-//         label: 'display count',
-//         data: []
-//       },
-//     ],
-//   }
-// }
+putPictureOnPage();
+
+function renderChart() {
+  var canvas = document.createElement('canvas');
+  canvas.width = product2.clientWidth;
+  canvas.height = product2.clientWidth;
+  product2.appendChild(canvas);
+
+  var ctx = canvas.getContext('2d');
+  var data = {
+    labels: [],
+    datasets: [
+      {
+        label: 'Click count',
+        data: []
+      },
+      {
+        label: 'display count',
+        data: []
+      },
+    ],
+  };
+  var photo;
+  for (var i=0; i<prodArray.length; i++){
+    photo = prodArray[i];
+    console.log(photo.name);
+    data.labels.push(photo.name);
+    data.datasets[0].data.push(photo.clicked);
+    data.datasets[1].data.push(photo.displayed);
+  }
+  new Chart(ctx, {
+    type: 'bar',
+    data: data,
+  });
+}
