@@ -7,6 +7,7 @@ var picturesPrevious = [];
 var product1, product2, product3;
 var clicksRemaining = 25;
 
+
 function imgSelection(name, src, tag) {
   this.name = name;
   this.src = src;
@@ -99,16 +100,28 @@ function handleImgClick(e) {
     product1.removeEventListener('click', handleImgClick);
     product2.removeEventListener('click', handleImgClick);
     product3.removeEventListener('click', handleImgClick);
+    prodArray = prodArray.concat(picturesPrevious);
+    localStorage.data = JSON.stringify(prodArray);
+
     renderChart();
   }
 }
+
+try {
+  prodArray = JSON.parse(localStorage.data);
+  localStorage.clear();
+} catch (error) {
+  console.log('no data');
+}
+
 putPictureOnPage();
 
 function renderChart() {
+  var productCounter = document.getElementById('product-counter');
   var canvas = document.createElement('canvas');
-  canvas.width = product2.clientWidth;
-  canvas.height = product2.clientWidth;
-  product2.appendChild(canvas);
+  canvas.width = productCounter.clientWidth;
+  canvas.height = productCounter.clientWidth;
+  productCounter.appendChild(canvas);
 
   var ctx = canvas.getContext('2d');
   var data = {
@@ -116,18 +129,20 @@ function renderChart() {
     datasets: [
       {
         label: 'Click count',
-        data: []
+        data: [],
+        backgroundColor : '#BF0001',
       },
       {
         label: 'display count',
-        data: []
+        data: [],
+        backgroundColor : '#000FBF',
       },
     ],
   };
   var photo;
   for (var i=0; i<prodArray.length; i++){
+    console.log(prodArray[i]);
     photo = prodArray[i];
-    console.log(photo.name);
     data.labels.push(photo.name);
     data.datasets[0].data.push(photo.clicked);
     data.datasets[1].data.push(photo.displayed);
