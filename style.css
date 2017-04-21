@@ -6,10 +6,18 @@
   background-color: black;
 }
 .picture-square {
-  display: inline-block;
+  display: inline-flex;
   width: 30%;
-  height: auto;
+  height: 30%;
   align-items: center;
+  border: 2px solid red;
+  margin-top: 200px;
+  margin-right: 10px;
+  margin-left: 13px;
+}
+.product-display {
+  border: 2px solid red;
+
 }
 .banner {
   height: 200px;
