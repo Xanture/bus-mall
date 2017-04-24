@@ -6,14 +6,17 @@
   background-color: black;
 }
 .picture-square {
-  display: inline-flex;
-  width: 30%;
-  height: 30%;
+  display: inline;
   align-items: center;
   border: 2px solid red;
+  margin: 55px;
+
+}
+img {
   margin-top: 200px;
-  margin-right: 10px;
-  margin-left: 13px;
+  height: 300px;
+  width: 300px;
+  display: inline-block;
 }
 .product-display {
   border: 2px solid red;
